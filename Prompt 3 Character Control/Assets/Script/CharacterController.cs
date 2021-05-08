@@ -44,7 +44,7 @@ public class CharacterController : MonoBehaviour
         //    this.camera.transform.RotateAround(this.cameraPoint.transform.position, this.transform.right, this.axisY- (angle - 85));
         //else
         this.camera.transform.RotateAround(this.cameraPoint.transform.position, this.transform.right, this.axisY);
-        Debug.Log(camera.transform.eulerAngles.x);
+        //Debug.Log(camera.transform.eulerAngles.x);
         //this.camera.transform.eulerAngles = new Vector3(this.camera.transform.rotation.x, this.camera.transform.rotation.y, 0);
         if (Input.GetKeyDown(KeyCode.Space) && !animStateInfo.IsName("Jump"))
         {
@@ -55,25 +55,35 @@ public class CharacterController : MonoBehaviour
     void FixedUpdate()
     {
         
-        
-        if (Input.GetKey(KeyCode.LeftShift))
+        float h = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical") ;
+        if(h == 0 && v == 0)
         {
-            this.speedup += Time.deltaTime;
+            this.speedup = 0.0f;
         }
         else
         {
-            if (this.speedup > 0.5)
-                this.speedup -= Time.deltaTime;
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                this.speedup += Time.deltaTime;
+                if (this.speedup > 1.0f)
+                    this.speedup = 1.0f;
+            }
             else
-                this.speedup = 0.5f;
+            {
+
+                if (this.speedup > 0.5)
+                    this.speedup -= Time.deltaTime;
+                else
+                    this.speedup = 0.5f;
+
+
+            }
         }
-
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical") * this.speedup;
-
+        v *= this.speedup;
         this.anim.SetFloat("Xspeed", h );
         this.anim.SetFloat("Yspeed", v );
-       
+        Debug.Log(this.speedup);
         this.transform.Translate(h * Time.deltaTime * moveSpeed, 0, v * Time.deltaTime * moveSpeed);
     }
 }
