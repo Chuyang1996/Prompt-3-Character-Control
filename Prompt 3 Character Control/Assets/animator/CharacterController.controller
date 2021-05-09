@@ -114,7 +114,7 @@ BlendTree:
     m_DirectBlendParameter: Xspeed
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: -203655887218126122, guid: 249c9d3951a9cb44ea750d5cb819e5f6, type: 3}
+    m_Motion: {fileID: -203655887218126122, guid: 823517c0d2ad3b34583824b00cb6149e, type: 3}
     m_Threshold: 0.33333334
     m_Position: {x: -1, y: 0}
     m_TimeScale: 1
@@ -159,7 +159,7 @@ BlendTree:
   m_MaxThreshold: 1
   m_UseAutomaticThresholds: 1
   m_NormalizedBlendValues: 0
-  m_BlendType: 1
+  m_BlendType: 2
 --- !u!1101 &3551265928965163823
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -227,7 +227,7 @@ AnimatorState:
   m_IKOnFeet: 1
   m_WriteDefaultValues: 1
   m_Mirror: 0
-  m_SpeedParameterActive: 1
+  m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0

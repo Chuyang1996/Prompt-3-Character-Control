@@ -377,8 +377,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4591362994839399895, guid: 5d4ba37adcd31ab4b984d11fc784c660, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: 1165afd2119d889478baec03c4ad271d, type: 3}
+    - target: {fileID: 4591362994839399895, guid: 5d4ba37adcd31ab4b984d11fc784c660, type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 24103a067d1fec0478c6d1724e37a192, type: 2}
+    - target: {fileID: 4591362994839399895, guid: 5d4ba37adcd31ab4b984d11fc784c660, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d4ba37adcd31ab4b984d11fc784c660, type: 3}
