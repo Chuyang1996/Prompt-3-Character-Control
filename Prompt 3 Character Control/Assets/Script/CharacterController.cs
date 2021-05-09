@@ -85,5 +85,10 @@ public class CharacterController : MonoBehaviour
         this.anim.SetFloat("Yspeed", v );
         Debug.Log(this.speedup);
         this.transform.Translate(h * Time.deltaTime * moveSpeed, 0, v * Time.deltaTime * moveSpeed);
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            this.anim.SetTrigger("lightAttack");
+        }
     }
 }
