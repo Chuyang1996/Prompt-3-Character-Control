@@ -89,7 +89,7 @@ public class DoneEnemyShooting : MonoBehaviour
 		float damage = scaledDamage * fractionalDistance + minimumDamage;
 
 		// The player takes damage.
-		playerHealth.TakeDamage(damage);
+
 		
 		// Display the shot effects.
 		ShotEffects();

@@ -91,7 +91,7 @@ public class DoneLiftTrigger : MonoBehaviour
 				GetComponent<AudioSource>().Play();
 			
 			// If the timer is greater than the amount of time before the level should end...
-			if(timer >= timeToEndLevel)
+
 				// ... call the EndScene function.
 
 		}

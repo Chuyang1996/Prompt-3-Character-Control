@@ -11,7 +11,6 @@ public class DonePlayerHealth : MonoBehaviour
 	private Animator anim;								// Reference to the animator component.
 	private DonePlayerMovement playerMovement;			// Reference to the player movement script.
 	private DoneHashIDs hash;							// Reference to the HashIDs.
-	private DoneSceneFadeInOut sceneFadeInOut;			// Reference to the SceneFadeInOut script.
 	private DoneLastPlayerSighting lastPlayerSighting;	// Reference to the LastPlayerSighting script.
 	private float timer;								// A timer for counting to the reset of the level once the player is dead.
 	private bool playerDead;							// A bool to show if the player is dead or not.
@@ -23,7 +22,7 @@ public class DonePlayerHealth : MonoBehaviour
 		anim = GetComponent<Animator>();
 		playerMovement = GetComponent<DonePlayerMovement>();
 		hash = GameObject.FindGameObjectWithTag(DoneTags.gameController).GetComponent<DoneHashIDs>();
-		sceneFadeInOut = GameObject.FindGameObjectWithTag(DoneTags.fader).GetComponent<DoneSceneFadeInOut>();
+
 		lastPlayerSighting = GameObject.FindGameObjectWithTag(DoneTags.gameController).GetComponent<DoneLastPlayerSighting>();
 	}
 	
@@ -76,23 +75,19 @@ public class DonePlayerHealth : MonoBehaviour
 		// Stop the footsteps playing.
 		GetComponent<AudioSource>().Stop();
 	}
-	
-	
-	void LevelReset ()
+
+
+	void LevelReset()
 	{
 		// Increment the timer.
 		timer += Time.deltaTime;
-		
+
 		//If the timer is greater than or equal to the time before the level resets...
-		if(timer >= resetAfterDeathTime)
-			// ... reset the level.
-			sceneFadeInOut.EndScene();
-	}
-	
-	
-	public void TakeDamage (float amount)
-    {
-		// Decrement the player's health by amount.
-        health -= amount;
-    }
+		if (timer >= resetAfterDeathTime)
+        {
+
+        }
+
+
+}
 }
