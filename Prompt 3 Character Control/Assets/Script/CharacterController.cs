@@ -50,6 +50,38 @@ public class CharacterController : MonoBehaviour
         {
             this.anim.SetTrigger("Jump");
         }
+        this.animStateInfo = this.anim.GetCurrentAnimatorStateInfo(0);
+        //if (Input.GetMouseButton(1))
+        //{
+        //    this.anim.SetLayerWeight(1, 1);
+        //    this.anim.SetLayerWeight(0, 0);
+        //    return;
+        //}
+        //else
+        //{
+        //    this.anim.SetLayerWeight(0, 1);
+        //    this.anim.SetLayerWeight(1, 0);
+        //}
+        if (Input.GetMouseButtonDown(0) && this.animStateInfo.normalizedTime > 0.5f && this.animStateInfo.IsName("Attack2"))
+        {
+            Debug.Log("ssss");
+            this.anim.SetTrigger("Attack3");
+            this.anim.ResetTrigger("Attack1");
+            this.anim.ResetTrigger("Attack2");
+        }
+        else if (Input.GetMouseButtonDown(0) && this.animStateInfo.normalizedTime > 0.5f && this.animStateInfo.IsName("Attack1") )
+        {
+            Debug.Log("aaaa");
+            this.anim.SetTrigger("Attack2");
+            this.anim.ResetTrigger("Attack1");
+            this.anim.ResetTrigger("Attack3");
+        }
+        else if (Input.GetMouseButtonDown(0)&& this.animStateInfo.IsName("BattleState"))
+        {
+            this.anim.SetTrigger("Attack1");
+            this.anim.ResetTrigger("Attack2");
+            this.anim.ResetTrigger("Attack3");
+        }
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -83,12 +115,11 @@ public class CharacterController : MonoBehaviour
         v *= this.speedup;
         this.anim.SetFloat("Xspeed", h );
         this.anim.SetFloat("Yspeed", v );
-        Debug.Log(this.speedup);
+        //Debug.Log(this.speedup);
         this.transform.Translate(h * Time.deltaTime * moveSpeed, 0, v * Time.deltaTime * moveSpeed);
+        AnimatorStateInfo animStateInfoTemp = anim.GetCurrentAnimatorStateInfo(0);
+        //Debug.Log(animStateInfoTemp.normalizedTime);
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            this.anim.SetTrigger("lightAttack");
-        }
+
     }
 }
