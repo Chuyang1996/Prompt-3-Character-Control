@@ -200,6 +200,7 @@ public class AudioObjectPool
 			this.gameSceneSound.transform.localPosition = new Vector3(0, 0, 0);
 			foreach (string ac in this.audioList)
 			{
+			    Debug.Log(ac);
 				audioDic.Add(ac, (Resources.Load(audioPath + ac, typeof(AudioClip)) as AudioClip));
 			}
 		}

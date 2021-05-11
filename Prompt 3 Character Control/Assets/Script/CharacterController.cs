@@ -160,6 +160,7 @@ public class CharacterController : MonoBehaviour
 
         if (this.animStateInfoZero.IsName("Dodge"))
         {
+            this.speedup = 0.5f;
             this.anim.SetFloat("Xspeed", xD * 0.5f);
             this.anim.SetFloat("Yspeed", yD *0.5f);
         }
@@ -174,6 +175,7 @@ public class CharacterController : MonoBehaviour
         //Debug.Log(this.speedup);
         if (!this.animStateInfoZero.IsName("Attack1") && !this.animStateInfoZero.IsName("Attack2") && !this.animStateInfoZero.IsName("Attack3"))
         {
+            
             this.transform.Translate(h * Time.deltaTime * moveSpeed, 0, v * Time.deltaTime * moveSpeed);
         }
         //Debug.Log(animStateInfoTemp.normalizedTime);
@@ -185,22 +187,27 @@ public class CharacterController : MonoBehaviour
     {
         if (this.animStateInfoZero.IsName("NormalState") || this.animStateInfoZero.IsName("BattleState"))
         {
-
-        }else if (this.animStateInfoZero.IsName("Dodge"))
+            this.currentAudio = AudioManager.Instance.PlayAudio(this.transform, "Run",true);
+        }
+        else if (this.animStateInfoZero.IsName("Dodge"))
         {
-
+            if (this.currentAudio != null)
+                AudioManager.Instance.StopSound(this.currentAudio);
         }
         else if (this.animStateInfoZero.IsName("Attack1"))
         {
-
+            if (this.currentAudio != null)
+                AudioManager.Instance.StopSound(this.currentAudio);
         }
         else if (this.animStateInfoZero.IsName("Attack2"))
         {
-
+            if (this.currentAudio != null)
+                AudioManager.Instance.StopSound(this.currentAudio);
         }
         else if (this.animStateInfoZero.IsName("Attack3"))
         {
-
+            if (this.currentAudio != null)
+                AudioManager.Instance.StopSound(this.currentAudio);
         }
     }
 
