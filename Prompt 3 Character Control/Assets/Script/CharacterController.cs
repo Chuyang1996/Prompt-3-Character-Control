@@ -8,8 +8,7 @@ public class CharacterController : MonoBehaviour
     public float cameraSpeed;
     public Rigidbody rigidbody;
     public Animator anim;
-    public GameObject cameraPoint;
-    public Camera camera;
+    public Transform camera;
     private float speedup = 0.5f;
     private AnimatorStateInfo animStateInfoZero;
 
@@ -34,14 +33,15 @@ public class CharacterController : MonoBehaviour
 
     void Update()
     {
-        this.axisX += Input.GetAxis("Mouse X") * cameraSpeed;
-        this.axisY = Input.GetAxis("Mouse Y") * -cameraSpeed;
-        this.transform.rotation = Quaternion.Euler(0, this.axisX, 0);
+        //this.axisX += Input.GetAxis("Mouse X") * cameraSpeed;
+        //this.axisY = Input.GetAxis("Mouse Y") * -cameraSpeed;
+        var targetAngle = camera.eulerAngles.y;
+        this.transform.rotation = Quaternion.Euler(0, targetAngle, 0);
 
         //if ((this.camera.transform.eulerAngles.x >= 70.0f && this.axisY < 0)
         //    || (this.camera.transform.eulerAngles.x <= -70.0f && this.axisY > 0)
         //    ||(this.camera.transform.eulerAngles.x<=70.0f && this.camera.transform.eulerAngles.x>=-70.0f))
-        float angle = this.camera.transform.eulerAngles.x + this.axisY;
+        //float angle = this.camera.transform.eulerAngles.x + this.axisY;
         //if (angle > 180)
         //{
         //    angle -= 180.0f;
@@ -52,7 +52,7 @@ public class CharacterController : MonoBehaviour
         //else if (angle > 85)
         //    this.camera.transform.RotateAround(this.cameraPoint.transform.position, this.transform.right, this.axisY- (angle - 85));
         //else
-        this.camera.transform.RotateAround(this.cameraPoint.transform.position, this.transform.right, this.axisY);
+        //this.camera.transform.RotateAround(this.cameraPoint.transform.position, this.transform.right, this.axisY);
         //Debug.Log(camera.transform.eulerAngles.x);
         //this.camera.transform.eulerAngles = new Vector3(this.camera.transform.rotation.x, this.camera.transform.rotation.y, 0);
         //if (Input.GetKeyDown(KeyCode.Space) && !animStateInfoZero.IsName("Jump"))
