@@ -22,6 +22,8 @@ public class CharacterController : MonoBehaviour
     float axisY;
 
     float weight;
+
+    private AudioSource currentAudio;
     // Start is called before the first frame update
     void Start()
     {
@@ -179,6 +181,28 @@ public class CharacterController : MonoBehaviour
 
     }
 
+    void PlaySound(float xS, float yS)
+    {
+        if (this.animStateInfoZero.IsName("NormalState") || this.animStateInfoZero.IsName("BattleState"))
+        {
+
+        }else if (this.animStateInfoZero.IsName("Dodge"))
+        {
+
+        }
+        else if (this.animStateInfoZero.IsName("Attack1"))
+        {
+
+        }
+        else if (this.animStateInfoZero.IsName("Attack2"))
+        {
+
+        }
+        else if (this.animStateInfoZero.IsName("Attack3"))
+        {
+
+        }
+    }
 
     IEnumerator BattleTimeCount()
     {
