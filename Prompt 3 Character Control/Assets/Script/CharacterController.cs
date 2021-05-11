@@ -92,6 +92,13 @@ public class CharacterController : MonoBehaviour
             this.anim.ResetTrigger("Attack2");
             this.anim.ResetTrigger("Attack3");
         }
+
+
+        if(Input.GetKeyDown("f"))
+        {
+            this.anim.SetBool("Battle", true);
+            
+        }
     }
     // Update is called once per frame
     void FixedUpdate()
