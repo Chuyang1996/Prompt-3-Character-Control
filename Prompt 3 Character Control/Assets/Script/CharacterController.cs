@@ -15,6 +15,8 @@ public class CharacterController : MonoBehaviour
 
     float axisX;
     float axisY;
+
+    float weight;
     // Start is called before the first frame update
     void Start()
     {
@@ -51,18 +53,25 @@ public class CharacterController : MonoBehaviour
             this.anim.SetTrigger("Jump");
         }
         this.animStateInfo = this.anim.GetCurrentAnimatorStateInfo(0);
-        //if (Input.GetMouseButton(1))
-        //{
-        //    this.anim.SetLayerWeight(1, 1);
-        //    this.anim.SetLayerWeight(0, 0);
-        //    return;
-        //}
-        //else
-        //{
-        //    this.anim.SetLayerWeight(0, 1);
-        //    this.anim.SetLayerWeight(1, 0);
-        //}
-        if (Input.GetMouseButtonDown(0) && this.animStateInfo.normalizedTime > 0.5f && this.animStateInfo.IsName("Attack2"))
+
+        if (Input.GetMouseButton(1))
+        {
+            this.weight = Mathf.Lerp(this.weight, 1, Time.deltaTime * 8.0f);
+            this.anim.SetLayerWeight(1, weight);
+            this.anim.SetLayerWeight(0, 0);
+            return;
+        }
+        else
+        {
+            this.weight = Mathf.Lerp(this.weight, 0, Time.deltaTime * 8.0f);
+            this.anim.SetLayerWeight(0, 1);
+            this.anim.SetLayerWeight(1, this.weight);
+        }
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            this.anim.SetTrigger("Dodge");
+        }
+        else if (Input.GetMouseButtonDown(0) && this.animStateInfo.normalizedTime > 0.5f && this.animStateInfo.IsName("Attack2"))
         {
             Debug.Log("ssss");
             this.anim.SetTrigger("Attack3");
