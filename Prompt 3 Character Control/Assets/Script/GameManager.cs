@@ -9,7 +9,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         this.audioManager.InitAudio();
-        AudioManager.Instance.PlayMusic("");
+        AudioManager.Instance.PlayMusic("Deplata");
+        AudioManager.Instance.PlayAudio(this.transform, "Desert",true);
     }
 
 
