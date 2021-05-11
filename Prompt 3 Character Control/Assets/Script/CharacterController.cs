@@ -26,7 +26,7 @@ public class CharacterController : MonoBehaviour
     void Update()
     {
         this.axisX += Input.GetAxis("Mouse X") * cameraSpeed;
-        this.axisY = Input.GetAxis("Mouse Y") * cameraSpeed; 
+        this.axisY = Input.GetAxis("Mouse Y") * -cameraSpeed; 
         this.transform.rotation = Quaternion.Euler(0, this.axisX, 0);
 
         //if ((this.camera.transform.eulerAngles.x >= 70.0f && this.axisY < 0)
