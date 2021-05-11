@@ -48,10 +48,10 @@ public class CharacterController : MonoBehaviour
         this.camera.transform.RotateAround(this.cameraPoint.transform.position, this.transform.right, this.axisY);
         //Debug.Log(camera.transform.eulerAngles.x);
         //this.camera.transform.eulerAngles = new Vector3(this.camera.transform.rotation.x, this.camera.transform.rotation.y, 0);
-        if (Input.GetKeyDown(KeyCode.Space) && !animStateInfoZero.IsName("Jump"))
-        {
-            this.anim.SetTrigger("Jump");
-        }
+        //if (Input.GetKeyDown(KeyCode.Space) && !animStateInfoZero.IsName("Jump"))
+        //{
+        //    this.anim.SetTrigger("Jump");
+        //}
         this.animStateInfoZero = this.anim.GetCurrentAnimatorStateInfo(0);
 
         if (Input.GetMouseButton(1))
@@ -68,7 +68,7 @@ public class CharacterController : MonoBehaviour
             this.anim.SetLayerWeight(1, this.weight);
         }
 
-        if (Input.GetKeyDown(KeyCode.C))
+        if (Input.GetKeyDown(KeyCode.Space)&&!this.animStateInfoZero.IsName("Dodge"))
         {
             this.anim.SetTrigger("Dodge");
         }
@@ -124,7 +124,7 @@ public class CharacterController : MonoBehaviour
                 if (this.speedup > 0.5)
                     this.speedup -= Time.deltaTime;
                 else
-                    this.speedup = 0.5f;
+                    this.speedup += Time.deltaTime;
 
 
             }
@@ -139,26 +139,25 @@ public class CharacterController : MonoBehaviour
             else
                 this.speedup = 0.5f;
         }
-        if(this.animStateInfoZero.IsName("Attack1") || this.animStateInfoZero.IsName("Attack2") || this.animStateInfoZero.IsName("Attack3"))
-        {
-            v = 0.0f; h = 0.0f;
-        }else if (this.anim.GetLayerWeight(1) > 0.1f)
+        
+        if (this.anim.GetLayerWeight(1) > 0.1f)
         {
             if (this.speedup > 0.5)
                 this.speedup -= Time.deltaTime;
             else
                 this.speedup = 0.5f;
         }
-        //else if(this.animStateInfoZero.IsName("Dodge"))
-        //{
-        //    v = 1.0f; h = 1.0f;
-        //    this.speedup = 1.0f;
-        //}
-        this.anim.SetFloat("Xspeed", h );
-        this.anim.SetFloat("Yspeed", v );
+
+        if (!this.animStateInfoZero.IsName("Dodge"))
+        {
+            this.anim.SetFloat("Xspeed", h);
+            this.anim.SetFloat("Yspeed", v);
+        }
         //Debug.Log(this.speedup);
-        this.transform.Translate(h * Time.deltaTime * moveSpeed, 0, v * Time.deltaTime * moveSpeed);
-        AnimatorStateInfo animStateInfoTemp = anim.GetCurrentAnimatorStateInfo(0);
+        if (!this.animStateInfoZero.IsName("Attack1") && !this.animStateInfoZero.IsName("Attack2") && !this.animStateInfoZero.IsName("Attack3"))
+        {
+            this.transform.Translate(h * Time.deltaTime * moveSpeed, 0, v * Time.deltaTime * moveSpeed);
+        }
         //Debug.Log(animStateInfoTemp.normalizedTime);
 
 
