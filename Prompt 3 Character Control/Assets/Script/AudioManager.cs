@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
-using WarChess.Base;
 //声音对象池
 public class AudioObjectPool
 {
@@ -74,8 +73,6 @@ public class AudioObjectPool
 	}
 }
 
-namespace WarChess.Base
-{
 	public class AudioManager : SingletonMono<AudioManager>
 	{
 		private const string audioPath = "Audio/";
@@ -176,7 +173,7 @@ namespace WarChess.Base
             {
 				this.audioList[i] = this.audioList[i].ToString().Remove(0, pathLength).Remove(0, 1).Replace(".wav", "");
 			}
-			Debug.Log(this.audioList[0]);
+
 			SceneManager.sceneUnloaded += scene =>
 			{
 				StopAllCoroutines();
@@ -331,4 +328,3 @@ namespace WarChess.Base
 			StopAllCoroutines();
 		}
 	}
-}
