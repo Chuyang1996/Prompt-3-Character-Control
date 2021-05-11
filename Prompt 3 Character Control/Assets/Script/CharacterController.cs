@@ -67,6 +67,7 @@ public class CharacterController : MonoBehaviour
             this.anim.SetLayerWeight(0, 1);
             this.anim.SetLayerWeight(1, this.weight);
         }
+
         if (Input.GetKeyDown(KeyCode.C))
         {
             this.anim.SetTrigger("Dodge");
