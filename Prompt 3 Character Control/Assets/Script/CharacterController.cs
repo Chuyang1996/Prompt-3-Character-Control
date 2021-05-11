@@ -11,7 +11,7 @@ public class CharacterController : MonoBehaviour
     public GameObject cameraPoint;
     public Camera camera;
     private float speedup = 0.5f;
-    private AnimatorStateInfo animStateInfo;
+    private AnimatorStateInfo animStateInfoZero;
 
     float axisX;
     float axisY;
@@ -20,7 +20,7 @@ public class CharacterController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.animStateInfo = this.anim.GetCurrentAnimatorStateInfo(0);
+        this.animStateInfoZero = this.anim.GetCurrentAnimatorStateInfo(0);
         Cursor.visible = false;//
         Cursor.lockState = CursorLockMode.Locked;//
     }
@@ -48,11 +48,11 @@ public class CharacterController : MonoBehaviour
         this.camera.transform.RotateAround(this.cameraPoint.transform.position, this.transform.right, this.axisY);
         //Debug.Log(camera.transform.eulerAngles.x);
         //this.camera.transform.eulerAngles = new Vector3(this.camera.transform.rotation.x, this.camera.transform.rotation.y, 0);
-        if (Input.GetKeyDown(KeyCode.Space) && !animStateInfo.IsName("Jump"))
+        if (Input.GetKeyDown(KeyCode.Space) && !animStateInfoZero.IsName("Jump"))
         {
             this.anim.SetTrigger("Jump");
         }
-        this.animStateInfo = this.anim.GetCurrentAnimatorStateInfo(0);
+        this.animStateInfoZero = this.anim.GetCurrentAnimatorStateInfo(0);
 
         if (Input.GetMouseButton(1))
         {
@@ -67,25 +67,25 @@ public class CharacterController : MonoBehaviour
             this.anim.SetLayerWeight(0, 1);
             this.anim.SetLayerWeight(1, this.weight);
         }
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.C))
         {
             this.anim.SetTrigger("Dodge");
         }
-        else if (Input.GetMouseButtonDown(0) && this.animStateInfo.normalizedTime > 0.5f && this.animStateInfo.IsName("Attack2"))
+        else if (Input.GetMouseButtonDown(0) && this.animStateInfoZero.normalizedTime > 0.5f && this.animStateInfoZero.IsName("Attack2"))
         {
             Debug.Log("ssss");
             this.anim.SetTrigger("Attack3");
             this.anim.ResetTrigger("Attack1");
             this.anim.ResetTrigger("Attack2");
         }
-        else if (Input.GetMouseButtonDown(0) && this.animStateInfo.normalizedTime > 0.5f && this.animStateInfo.IsName("Attack1") )
+        else if (Input.GetMouseButtonDown(0) && this.animStateInfoZero.normalizedTime > 0.5f && this.animStateInfoZero.IsName("Attack1") )
         {
             Debug.Log("aaaa");
             this.anim.SetTrigger("Attack2");
             this.anim.ResetTrigger("Attack1");
             this.anim.ResetTrigger("Attack3");
         }
-        else if (Input.GetMouseButtonDown(0)&& this.animStateInfo.IsName("BattleState"))
+        else if (Input.GetMouseButtonDown(0)&& this.animStateInfoZero.IsName("BattleState"))
         {
             this.anim.SetTrigger("Attack1");
             this.anim.ResetTrigger("Attack2");
@@ -122,6 +122,30 @@ public class CharacterController : MonoBehaviour
             }
         }
         v *= this.speedup;
+        h *= this.speedup;
+        this.animStateInfoZero = this.anim.GetCurrentAnimatorStateInfo(0);
+        if (Input.GetMouseButton(1))
+        {
+            if (this.speedup > 0.5)
+                this.speedup -= Time.deltaTime;
+            else
+                this.speedup = 0.5f;
+        }
+        if(this.animStateInfoZero.IsName("Attack1") || this.animStateInfoZero.IsName("Attack2") || this.animStateInfoZero.IsName("Attack3"))
+        {
+            v = 0.0f; h = 0.0f;
+        }else if (this.anim.GetLayerWeight(1) > 0.1f)
+        {
+            if (this.speedup > 0.5)
+                this.speedup -= Time.deltaTime;
+            else
+                this.speedup = 0.5f;
+        }
+        //else if(this.animStateInfoZero.IsName("Dodge"))
+        //{
+        //    v = 1.0f; h = 1.0f;
+        //    this.speedup = 1.0f;
+        //}
         this.anim.SetFloat("Xspeed", h );
         this.anim.SetFloat("Yspeed", v );
         //Debug.Log(this.speedup);
