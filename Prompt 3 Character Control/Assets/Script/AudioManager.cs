@@ -174,18 +174,18 @@ public class AudioObjectPool
 				this.audioList[i] = this.audioList[i].ToString().Remove(0, pathLength).Remove(0, 1).Replace(".wav", "");
 			}
 
-			SceneManager.sceneUnloaded += scene =>
-			{
-				StopAllCoroutines();
-				for (int i = 0; i < transform.childCount; i++)
-				{
-					if (transform.GetChild(i).hideFlags != HideFlags.HideInHierarchy)
-					{
-						InitAudioSource(transform.GetChild(i).GetComponent<AudioSource>());
-						audioObjectPool.ReleaseInstance(transform.GetChild(i).gameObject);
-					}
-				}
-			};
+			//SceneManager.sceneUnloaded += scene =>
+			//{
+			//	StopAllCoroutines();
+			//	for (int i = 0; i < transform.childCount; i++)
+			//	{
+			//		if (transform.GetChild(i).hideFlags != HideFlags.HideInHierarchy)
+			//		{
+			//			InitAudioSource(transform.GetChild(i).GetComponent<AudioSource>());
+			//			audioObjectPool.ReleaseInstance(transform.GetChild(i).gameObject);
+			//		}
+			//	}
+			//};
 			GameObject audioPrefab = new GameObject("AudioObjectPool");
 			this.backGroundMusic = (new GameObject("Music")).AddComponent<AudioSource>();
 			this.gameSceneSound = new GameObject("Sound");
