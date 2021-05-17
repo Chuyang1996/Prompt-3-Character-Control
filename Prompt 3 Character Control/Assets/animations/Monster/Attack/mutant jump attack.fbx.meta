@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 42c67709eea556a469484be5af86bd3d
+guid: bbe18d90015324949ada4d5d382bf6bc
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: mutant idle
+    second: mutant jump attack
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -19,7 +19,13 @@ ModelImporter:
     optimizeGameObjects: 0
     motionNodeName: 
     rigImportErrors: 
-    rigImportWarnings: 
+    rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Bone length in
+      copied configuration does not match position in animation file:\n\t'LeftUpLeg'
+      : position error = 80.351036 mm\n\t'LeftLeg' : position error = 84.283371 mm\n\t'LeftFoot'
+      : position error = 118.800621 mm\n\t'LeftToeBase' : position error = 105.192673
+      mm\n\t'RightUpLeg' : position error = 80.351013 mm\n\t'RightLeg' : position
+      error = 84.359528 mm\n\t'RightFoot' : position error = 118.828941 mm\n\t'RightToeBase'
+      : position error = 105.192657 mm\n"
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -35,23 +41,23 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: mutant idle
+      name: mutant jump attack
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
-      lastFrame: 427
+      lastFrame: 111
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
       loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
+      keepOriginalOrientation: 1
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0
       heightFromFeet: 0
