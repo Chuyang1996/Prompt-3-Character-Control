@@ -24,6 +24,9 @@ public class playerController : MonoBehaviour
     float weight;
 
     private AudioSource currentAudio;
+
+    float turnSmoothT = 0.2f;
+    float turnSmoothV;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,8 +40,9 @@ public class playerController : MonoBehaviour
     {
         //this.axisX += Input.GetAxis("Mouse X") * cameraSpeed;
         //this.axisY = Input.GetAxis("Mouse Y") * -cameraSpeed;
-        var targetAngle = camera.eulerAngles.y;
-        this.transform.rotation = Quaternion.Euler(0, targetAngle, 0);
+        float targetAngle = camera.eulerAngles.y;
+        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothV, turnSmoothT);
+        this.transform.rotation = Quaternion.Euler(0, angle, 0);
 
         //if ((this.camera.transform.eulerAngles.x >= 70.0f && this.axisY < 0)
         //    || (this.camera.transform.eulerAngles.x <= -70.0f && this.axisY > 0)
