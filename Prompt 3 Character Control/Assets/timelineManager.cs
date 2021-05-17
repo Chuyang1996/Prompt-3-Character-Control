@@ -17,12 +17,12 @@ public class timelineManager : MonoBehaviour
         if (director.state == PlayState.Playing)
         {
             Debug.Log("is playing");
-            player.GetComponent<PlayerController>().enabled = false;
+            player.GetComponent<playerController>().enabled = false;
           
         }
         else
         {
-            player.GetComponent<PlayerController>().enabled = true;
+            player.GetComponent<playerController>().enabled = true;
           
         }
         
