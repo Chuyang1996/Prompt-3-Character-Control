@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class AIController : MonoBehaviour
 {
+    public GameObject healthPanel;
     [Range(0, 1000)]
     public float healthPoint;
     public Slider healthBar;
@@ -105,6 +106,7 @@ public class AIController : MonoBehaviour
     {
         if (this.DistanceForTarget() > this.confrontDis)
         {
+            this.healthPanel.SetActive(true);
             this.playerCpntroller.anim.SetBool("Battle", true);
             this.confrontTimeCount = 0.0f;
             this.nav.Resume();
@@ -264,6 +266,7 @@ public class AIController : MonoBehaviour
     {
         if(this.isDead)
         {
+            this.healthPanel.SetActive(false);
             this.healthBar.value = 0.0f;
             this.anim.ResetTrigger("Death");
             this.playerCpntroller.anim.SetBool("Battle", false);
