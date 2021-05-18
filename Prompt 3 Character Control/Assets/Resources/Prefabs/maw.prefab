@@ -94,6 +94,19 @@ Transform:
   m_Father: {fileID: 714907873}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 25, y: -16, z: 0}
+--- !u!135 &48086273
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 297369890}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1941661116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,19 +127,6 @@ MonoBehaviour:
   speed: 15
   min_distance: 0.5
   bulletType: 0
---- !u!135 &48086273
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 297369890}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &576320536
 GameObject:
   m_ObjectHideFlags: 0
@@ -1957,7 +1957,7 @@ GameObject:
   - component: {fileID: 843300610}
   - component: {fileID: 843300615}
   - component: {fileID: 843300613}
-  - component: {fileID: 843300614}
+  - component: {fileID: 151997529}
   m_Layer: 0
   m_Name: maw
   m_TagString: boss
@@ -2242,7 +2242,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &843300614
+--- !u!114 &151997529
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2251,12 +2251,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 8201451312847369215}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4bdffc76a93da2469c48883b32aeebf, type: 3}
+  m_Script: {fileID: 11500000, guid: 57f02924e2f26f04d99be90594c25276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentAudio: {fileID: 843300613}
   audios:
   - {fileID: 8300000, guid: 297d0e6ed07feb1439c0974de576af5a, type: 3}
+  - {fileID: 8300000, guid: 812a0e3933b0a374ca68ebb9a70c3821, type: 3}
+  - {fileID: 8300000, guid: 1adb6f263f78dcd4d9661447346d7bf7, type: 3}
+  - {fileID: 8300000, guid: 4742a28cef3d2724ba9237c2f0ba66c4, type: 3}
+  - {fileID: 8300000, guid: 9458b6394eeab6642a11a187433cadb2, type: 3}
+  - {fileID: 8300000, guid: 812a0e3933b0a374ca68ebb9a70c3821, type: 3}
+  - {fileID: 8300000, guid: e9362d3c4b473a7448eaee58f1270ea2, type: 3}
+  - {fileID: 8300000, guid: d41a43db08e2378489a7da8fd2659456, type: 3}
+  - {fileID: 8300000, guid: b713f526997cfd74f8291b8263e49ed1, type: 3}
+  - {fileID: 8300000, guid: 6f0df3a5c4283c442ae31a1e830860e7, type: 3}
 --- !u!1 &8326283809128088077
 GameObject:
   m_ObjectHideFlags: 0

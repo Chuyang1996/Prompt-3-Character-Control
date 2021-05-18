@@ -59,10 +59,24 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
+      - time: 0.21606746
+        functionName: CreateFireBall
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 57f02924e2f26f04d99be90594c25276, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.2389537
         functionName: CreateFireBall
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: 2980ebf25f720a042bfddb076d24e285, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.27335218
+        functionName: CreateFireBall
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 57f02924e2f26f04d99be90594c25276, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
@@ -73,6 +87,13 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.32187623
+        functionName: CreateFireBall
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 57f02924e2f26f04d99be90594c25276, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.34703925
         functionName: CreateFireBall
         data: 
@@ -80,10 +101,24 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.3764658
+        functionName: CreateFireBall
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 57f02924e2f26f04d99be90594c25276, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.40068445
         functionName: CreateFireBall
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: 2980ebf25f720a042bfddb076d24e285, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.42903352
+        functionName: CreateFireBall
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 57f02924e2f26f04d99be90594c25276, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0

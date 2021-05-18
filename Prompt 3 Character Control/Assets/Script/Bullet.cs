@@ -94,6 +94,7 @@ public class Bullet : MonoBehaviour
             // [停止]当前协程任务,参数是协程方法名
             StopCoroutine(Parabola(pos));
             // 销毁脚本
+            AudioManager.Instance.PlayAudio(this.transform, "ThrowExplosion");
             GameObject.Destroy(this.gameObject);
         }
     }
@@ -102,6 +103,7 @@ public class Bullet : MonoBehaviour
     {
         if(other.gameObject.tag =="Floor" && this.bulletType == BulletType.Straight)
         {
+            AudioManager.Instance.PlayAudio(this.transform, "FireExplosion");
             DestroyImmediate(this.gameObject);
         }
         if (other.GetComponent<PlayerController>() != null)

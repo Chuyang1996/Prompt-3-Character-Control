@@ -50,6 +50,7 @@ public class CharacterAttackEvent : MonoBehaviour
             Debug.LogError("进入攻击区");
             if (this.isAttackA)
             {
+                AudioManager.Instance.PlayAudio(this.transform, "AttackHit");
                 Debug.LogError("打中了！！！！！！！！！！！！！！！！！！！！！！");
                 other.gameObject.GetComponent<AIController>().healthPoint -= this.attackApoint;
                 //other.gameObject.GetComponent<AIController>().Hit();
@@ -58,6 +59,7 @@ public class CharacterAttackEvent : MonoBehaviour
             }
             else if (this.isAttackB)
             {
+                AudioManager.Instance.PlayAudio(this.transform, "AttackHit");
                 Debug.LogError("打中了！！！！！！！！！！！！！！！！！！！！！！");
                 other.gameObject.GetComponent<AIController>().healthPoint -= this.attackBpoint;
                 //other.gameObject.GetComponent<AIController>().Hit();
@@ -65,6 +67,7 @@ public class CharacterAttackEvent : MonoBehaviour
             }
             else if (this.isAttackC)
             {
+                AudioManager.Instance.PlayAudio(this.transform, "AttackHit");
                 Debug.LogError("打中了！！！！！！！！！！！！！！！！！！！！！！");
                 other.gameObject.GetComponent<AIController>().healthPoint -= this.attackCpoint;
                 //other.gameObject.GetComponent<AIController>().HitFly();

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayAnimationSound : MonoBehaviour
+public class MonsterAnimationSoundEvent : MonoBehaviour
 {
     public AudioSource currentAudio;
     public AudioClip[] audios;
@@ -13,51 +13,77 @@ public class PlayAnimationSound : MonoBehaviour
         this.currentAudio.Play();
 
     }
-
-    private void Run() { 
+    private void Jump()
+    {
         this.currentAudio.clip = audios[1];
         this.currentAudio.loop = false;
         this.currentAudio.Play();
+
     }
-    private void Dodge()
+    private void Land()
     {
         this.currentAudio.clip = audios[2];
         this.currentAudio.loop = false;
         this.currentAudio.Play();
 
     }
-    private void Landing()
+
+    private void Attack1()
     {
         this.currentAudio.clip = audios[3];
         this.currentAudio.loop = false;
         this.currentAudio.Play();
 
     }
-    private void Roll()
+    private void Attack2()
     {
         this.currentAudio.clip = audios[4];
         this.currentAudio.loop = false;
         this.currentAudio.Play();
+
     }
-    private void Attack1()
+    private void Attack3One()
     {
         this.currentAudio.clip = audios[5];
         this.currentAudio.loop = false;
         this.currentAudio.Play();
 
     }
-    private void Attack2()
+    private void Attack3Sec()
     {
         this.currentAudio.clip = audios[6];
         this.currentAudio.loop = false;
         this.currentAudio.Play();
 
     }
-    private void Attack3()
+
+    private void CreateFireBall()
     {
         this.currentAudio.clip = audios[7];
         this.currentAudio.loop = false;
         this.currentAudio.Play();
-
     }
+
+    private void ShootFireBall()
+    {
+        this.currentAudio.clip = audios[8];
+        this.currentAudio.loop = false;
+        this.currentAudio.Play();
+    }
+
+    private void ThrowStone()
+    {
+        this.currentAudio.clip = audios[9];
+        this.currentAudio.loop = false;
+        this.currentAudio.Play();
+    }
+
+
+    private void LayDeath()
+    {
+        this.currentAudio.clip = audios[10];
+        this.currentAudio.loop = false;
+        this.currentAudio.Play();
+    }
+
 }

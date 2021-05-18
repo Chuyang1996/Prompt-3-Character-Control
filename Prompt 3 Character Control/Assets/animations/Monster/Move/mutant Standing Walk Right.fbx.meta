@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 67ba910bf18f006488b5faded8c6a2fe
+guid: 7e74d0ec8eb3910499162ce554e2d704
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
       74: -203655887218126122
+    second: Standing Walk Left (1)
+  - first:
+      74: 7653467683643760247
     second: mutant Standing Walk Right
   externalObjects: {}
   materials:
@@ -46,19 +49,33 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
       keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
+      keepOriginalPositionXZ: 1
       heightFromFeet: 0
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.28769746
+        functionName: Walk
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 57f02924e2f26f04d99be90594c25276, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.7137387
+        functionName: Walk
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 57f02924e2f26f04d99be90594c25276, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}

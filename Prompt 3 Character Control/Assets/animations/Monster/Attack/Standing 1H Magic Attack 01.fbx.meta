@@ -66,6 +66,13 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.36428913
+        functionName: ShootFireBall
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 57f02924e2f26f04d99be90594c25276, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
