@@ -1697,7 +1697,6 @@ GameObject:
   - component: {fileID: 4817146283595957935}
   - component: {fileID: 4995416094977679690}
   - component: {fileID: 4995416094977679689}
-  - component: {fileID: 5074682885097036451}
   m_Layer: 0
   m_Name: brute
   m_TagString: Untagged
@@ -1754,25 +1753,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &5074682885097036451
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5301336722484026389}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6b8a2020924d054696a3fe9fc7e93f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthPoint: 0
-  moveSpeed: 4
-  cameraSpeed: 0.5
-  rigidbody: {fileID: 4995416094977679690}
-  anim: {fileID: 0}
-  camera: {fileID: 4995416094170795955}
-  dust: {fileID: 0}
 --- !u!1 &5326265625949187611
 GameObject:
   m_ObjectHideFlags: 0

@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
 
     private AudioSource currentAudio;
 
-    float turnSmoothT = 0.2f;
+    float turnSmoothT = 0.1f;
     float turnSmoothV;
 
     public ParticleSystem dust;
