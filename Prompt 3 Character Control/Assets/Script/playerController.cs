@@ -27,6 +27,8 @@ public class playerController : MonoBehaviour
 
     float turnSmoothT = 0.2f;
     float turnSmoothV;
+
+    public ParticleSystem dust;
     // Start is called before the first frame update
     void Start()
     {
@@ -123,9 +125,11 @@ public class playerController : MonoBehaviour
         if(h == 0 && v == 0)
         {
             this.speedup = 0.0f;
+            dust.enableEmission = false;
         }
         else
         {
+            dust.enableEmission = true;
             if (Input.GetKey(KeyCode.LeftShift))
             {
                 this.speedup += Time.deltaTime;
