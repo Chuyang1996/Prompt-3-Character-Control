@@ -105,6 +105,7 @@ public class AIController : MonoBehaviour
     {
         if (this.DistanceForTarget() > this.confrontDis)
         {
+            this.playerCpntroller.anim.SetBool("Battle", true);
             this.confrontTimeCount = 0.0f;
             this.nav.Resume();
             this.nav.speed = this.moveSpeed;
@@ -265,6 +266,7 @@ public class AIController : MonoBehaviour
         {
             this.healthBar.value = 0.0f;
             this.anim.ResetTrigger("Death");
+            this.playerCpntroller.anim.SetBool("Battle", false);
             return;
         }
         this.healthBar.value = this.healthPoint / this.healthMax;

@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+
     public bool isDead = false;
+    public GameObject badResult;
     [Range(0,100)]
     public float healthPoint;
     public Slider healthBar;
@@ -254,6 +256,7 @@ public class PlayerController : MonoBehaviour
     {
         if (this.isDead)
         {
+            this.badResult.SetActive(true);
             this.healthBar.value = 0.0f;
             return;
         }
