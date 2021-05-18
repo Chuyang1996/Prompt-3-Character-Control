@@ -16,12 +16,12 @@ public class bossFightCG : MonoBehaviour
         if (director.state == PlayState.Playing)
         {
             Debug.Log("is playing");
-            player.GetComponent<playerController>().enabled = false;
+            player.GetComponent<PlayerController>().enabled = false;
 
         }
         else
         {
-            player.GetComponent<playerController>().enabled = true;
+            player.GetComponent<PlayerController>().enabled = true;
 
         }
 

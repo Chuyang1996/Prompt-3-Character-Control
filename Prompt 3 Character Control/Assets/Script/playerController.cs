@@ -2,8 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class playerController : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
+    [Range(0,100)]
+    public float healthPoint;
+
+
     public float moveSpeed;
     public float cameraSpeed;
     public Rigidbody rigidbody;
@@ -42,6 +46,7 @@ public class playerController : MonoBehaviour
     {
         //this.axisX += Input.GetAxis("Mouse X") * cameraSpeed;
         //this.axisY = Input.GetAxis("Mouse Y") * -cameraSpeed;
+        this.anim.SetFloat("Health", this.healthPoint);
         float targetAngle = camera.eulerAngles.y;
         float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothV, turnSmoothT);
         this.transform.rotation = Quaternion.Euler(0, angle, 0);
@@ -224,5 +229,17 @@ public class playerController : MonoBehaviour
         yield return new WaitForSeconds(this.battleTime);
         this.anim.SetBool("Battle", false);
 
+    }
+
+
+    public void HitFly()
+    {
+        this.anim.SetTrigger("Hit2");
+        this.rigidbody.AddForce(-this.transform.forward);
+    }
+
+    public void Hit()
+    {
+        this.anim.SetTrigger("Hit1");
     }
 }

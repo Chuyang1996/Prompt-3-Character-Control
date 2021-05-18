@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Fire
   - boss
+  - Floor
   layers:
   - Default
   - TransparentFX

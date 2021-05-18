@@ -5,14 +5,19 @@ using UnityEngine.UI;
 
 public class AIController : MonoBehaviour
 {
+    [Range(0, 1000)]
+    public float healthPoint;
+
     //public Button BTN;
     public float speed;
     public float moveSpeed;
-    [Range(1, 3)]
+    [Range(1, 6)]
     public float minDis;
-    [Range(3, 9)]
-    public float battleDis;
-    [Range(9, 40)]
+    [Range(6, 9)]
+    public float closeDis;
+    [Range(13, 15)]
+    public float confrontDis;
+    [Range(20, 40)]
     public float detectDis;
     [Range(1, 9)]
     public float confrontTime;
@@ -29,7 +34,9 @@ public class AIController : MonoBehaviour
 
     private AnimatorStateInfo animStateInfoZero;
     private delegate void AttackEvent();
-    private List<AttackEvent> attacks = new List<AttackEvent>();
+    private List<AttackEvent> minAction = new List<AttackEvent>();
+    private List<AttackEvent> closeAction = new List<AttackEvent>();
+    private List<AttackEvent> farAction = new List<AttackEvent>();
 
     // Start is called before the first frame update
     void Start()
@@ -37,18 +44,24 @@ public class AIController : MonoBehaviour
         this.ResetData();
         this.isAttack = false;
         
-        this.attacks.Add(()=>{Attack("Attack1"); });
-        this.attacks.Add(()=>{Attack("Attack2"); });
-        this.attacks.Add(()=>{Attack("Attack3"); });
+        this.minAction.Add(()=>{Attack("Attack1"); });
+        this.minAction.Add(()=>{ Back(); });
 
-        
+        this.closeAction.Add(() => { Attack("Attack2"); });
+        this.closeAction.Add(() => { Attack("Attack3"); });
+        this.closeAction.Add(() => { Back(); });
+
+        this.farAction.Add(() => { Attack("Attack4"); });
+        this.farAction.Add(() => { Attack("Attack5"); });
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        Debug.LogWarning(Vector3.Distance(this.player.transform.position, this.transform.position));
+        this.anim.SetFloat("Health", this.healthPoint);
+        Debug.LogWarning(this.DistanceForTarget());
         if (!this.Portal())
         {
             if (this.PursuitPlayer())
@@ -72,7 +85,7 @@ public class AIController : MonoBehaviour
         {
             this.ResetData();
         }
-        if (Vector3.Distance(this.transform.position, this.player.transform.position) > this.detectDis)
+        if (this.DistanceForTarget() > this.detectDis)
         {
             Debug.Log("Portal");
             return true;
@@ -83,7 +96,7 @@ public class AIController : MonoBehaviour
     }
     private bool PursuitPlayer()
     {
-        if (Vector3.Distance(this.transform.position, this.player.transform.position) > this.battleDis)
+        if (this.DistanceForTarget() > this.confrontDis)
         {
             this.confrontTimeCount = 0.0f;
             this.nav.Resume();
@@ -102,16 +115,16 @@ public class AIController : MonoBehaviour
             return false;
 
         }
-        else if (Vector3.Distance(this.transform.position, this.player.transform.position) < this.minDis)
-        {
-            this.ResetData();
-            if (this.animStateInfoZero.IsName("NormalState")/* && this.animStateInfoZero.normalizedTime < 1.0f*/)
-            {
-                this.isAttack = false;
-            }
-            this.Back();
-            return false;
-        }
+        //else if (Vector3.Distance(this.transform.position, this.player.transform.position) < this.minDis)
+        //{
+        //    this.ResetData();
+        //    if (this.animStateInfoZero.IsName("NormalState")/* && this.animStateInfoZero.normalizedTime < 1.0f*/)
+        //    {
+        //        this.isAttack = false;
+        //    }
+        //    this.Back();
+        //    return false;
+        //}
         return true;
     }
 
@@ -135,6 +148,7 @@ public class AIController : MonoBehaviour
         if (this.confrontTimeCount <= this.confrontTime)
         {
             Debug.Log("Battle");
+
             this.confrontTimeCount += Time.deltaTime;
             if (this.animStateInfoZero.IsName("NormalState")/* && this.animStateInfoZero.normalizedTime < 1.0f*/)
             {
@@ -167,11 +181,44 @@ public class AIController : MonoBehaviour
         {
             if (this.animStateInfoZero.IsName("NormalState") && !this.isAttack)
             {
-                int index = Random.Range(0, 2);
-                this.confrontTimeCount = 2.0f;//Random.Range(0, this.confrontTime);
-                this.attacks[index].Invoke();
-                Debug.Log("index: " + index);
-                Debug.Log("confrontTimeCount: " + this.confrontTimeCount);
+                if (this.DistanceForTarget() < this.minDis)
+                {
+                    int index = Random.Range(0, 11);
+                    this.confrontTimeCount = 2.0f;
+                    if (0 <= index && index <= 6)
+                    {
+                        this.minAction[0].Invoke();
+                    }
+                    else
+                    {
+                        this.minAction[1].Invoke();
+
+                    }
+                }
+                else if (this.DistanceForTarget() < this.closeDis)
+                {
+                    int index = Random.Range(0, 11);
+                    this.confrontTimeCount = 2.0f;
+                    if (0 <= index && index <= 3)
+                    {
+                        this.closeAction[0].Invoke();
+                    }
+                    else if (4 <= index && index <= 7)
+                    {
+                        this.closeAction[1].Invoke();
+                    }
+                    else
+                    {
+                        this.closeAction[2].Invoke();
+
+                    }
+                }
+                else
+                {
+                    int index = Random.Range(0, 2);
+                    this.confrontTimeCount = 0.0f;
+                    this.farAction[index].Invoke();
+                }
                 this.isAttack = true;
             }
             return false;
@@ -191,6 +238,7 @@ public class AIController : MonoBehaviour
 
     private void Back()
     {
+        this.ResetData();
         this.anim.SetTrigger("Back");
         //this.yDir -= Time.deltaTime * this.speed;
         //this.xDir -= Time.deltaTime * this.speed;
@@ -210,6 +258,8 @@ public class AIController : MonoBehaviour
         this.anim.ResetTrigger("Attack1");
         this.anim.ResetTrigger("Attack2");
         this.anim.ResetTrigger("Attack3");
+        this.anim.ResetTrigger("Attack4");
+        this.anim.ResetTrigger("Attack5");
         this.anim.ResetTrigger("Back");
         //this.xDir = 0.0f;
         //this.yDir = 0.0f;
@@ -220,5 +270,9 @@ public class AIController : MonoBehaviour
 
     }
 
+    private float DistanceForTarget()
+    {
+        return Vector2.Distance(new Vector2(this.transform.position.x, this.transform.position.z), new Vector2(this.player.transform.position.x, this.player.transform.position.z));
+    }
 
 }
