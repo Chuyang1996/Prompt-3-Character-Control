@@ -66,6 +66,20 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.3114414
+        functionName: AttackB
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 3cd85097b7b1e9f4e8e003c6c63efe72, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.34583774
+        functionName: ResetAttack
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 3cd85097b7b1e9f4e8e003c6c63efe72, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}

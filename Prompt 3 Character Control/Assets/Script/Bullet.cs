@@ -9,6 +9,9 @@ public enum BulletType
 }
 public class Bullet : MonoBehaviour
 {
+    [Range(20,40)]
+    public int bulletHurt = 40;
+
     public float straightSpeed = 2.0f;
     public float detectDis = 2.0f;
     [HideInInspector]
@@ -45,16 +48,7 @@ public class Bullet : MonoBehaviour
     void StraightShoot()
     {
         this.transform.Translate(new Vector3(0, 0, 1) * this.straightSpeed * Time.deltaTime);
-        Collider[] colliderObject = Physics.OverlapSphere(this.transform.position, this.detectDis);
 
-        for (int i = 0; i < colliderObject.Length; i++)
-        {
-            Debug.Log("''''''''''''''''''''" + colliderObject[i].gameObject.name);
-            if (colliderObject[i].gameObject.tag == "Floor")
-            {
-                DestroyImmediate(this.gameObject);
-            }
-        }
     }
 
     void Cursor()
@@ -106,9 +100,14 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if(other.gameObject.tag =="Floor" && this.bulletType == BulletType.Straight)
+        {
+            DestroyImmediate(this.gameObject);
+        }
         if (other.GetComponent<PlayerController>() != null)
         {
             other.GetComponent<PlayerController>().HitFly();
+            other.GetComponent<PlayerController>().healthPoint-=this.bulletHurt;
         }
     }
 

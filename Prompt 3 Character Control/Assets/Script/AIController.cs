@@ -7,6 +7,9 @@ public class AIController : MonoBehaviour
 {
     [Range(0, 1000)]
     public float healthPoint;
+    public Slider healthBar;
+    public bool isDead;
+    private float healthMax;
 
     //public Button BTN;
     public float speed;
@@ -29,6 +32,7 @@ public class AIController : MonoBehaviour
     private bool isAttack;
 
     public GameObject player;
+    public PlayerController playerCpntroller;
     public Animator anim;
     public NavMeshAgent nav;
 
@@ -42,6 +46,7 @@ public class AIController : MonoBehaviour
     void Start()
     {
         this.ResetData();
+        this.healthMax = this.healthPoint;
         this.isAttack = false;
         
         this.minAction.Add(()=>{Attack("Attack1"); });
@@ -60,10 +65,12 @@ public class AIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.anim.SetFloat("Health", this.healthPoint);
+        this.IsDead();
         Debug.LogWarning(this.DistanceForTarget());
         if (!this.Portal())
         {
+            if (this.playerCpntroller.isDead)
+                return;
             if (this.PursuitPlayer())
             {
                 if (!this.ConfrontPlayer())
@@ -252,7 +259,21 @@ public class AIController : MonoBehaviour
 
     }
 
-
+    private void IsDead()
+    {
+        if(this.isDead)
+        {
+            this.healthBar.value = 0.0f;
+            this.anim.ResetTrigger("Death");
+            return;
+        }
+        this.healthBar.value = this.healthPoint / this.healthMax;
+        if (this.healthPoint <= 0.0f)
+        {
+            this.isDead = true;
+            this.anim.SetTrigger("Death");
+        }
+    }
     private void ResetData()
     {
         this.anim.ResetTrigger("Attack1");

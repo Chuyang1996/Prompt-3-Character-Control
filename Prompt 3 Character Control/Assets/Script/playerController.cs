@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    public bool isDead = false;
     [Range(0,100)]
     public float healthPoint;
+    public Slider healthBar;
 
+    private float healthMax;
 
     public float moveSpeed;
     public float cameraSpeed;
@@ -36,6 +40,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        this.healthMax = this.healthPoint;
         this.battleTimeCount = this.battleTime;
         this.animStateInfoZero = this.anim.GetCurrentAnimatorStateInfo(0);
         Cursor.visible = false;//
@@ -46,7 +51,7 @@ public class PlayerController : MonoBehaviour
     {
         //this.axisX += Input.GetAxis("Mouse X") * cameraSpeed;
         //this.axisY = Input.GetAxis("Mouse Y") * -cameraSpeed;
-        this.anim.SetFloat("Health", this.healthPoint);
+        this.IsDead();
         float targetAngle = camera.eulerAngles.y;
         float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothV, turnSmoothT);
         this.transform.rotation = Quaternion.Euler(0, angle, 0);
@@ -72,6 +77,8 @@ public class PlayerController : MonoBehaviour
         //{
         //    this.anim.SetTrigger("Jump");
         //}
+        if (this.IfCannotControl())
+            return;
         this.animStateInfoZero = this.anim.GetCurrentAnimatorStateInfo(0);
 
         if (Input.GetMouseButton(1) && (this.animStateInfoZero.IsName("BattleState") || this.animStateInfoZero.IsName("NormalState")))
@@ -122,7 +129,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        
+        if (this.IfCannotControl())
+            return;
         float h = Input.GetAxis("Horizontal");
         float xD = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical") ;
@@ -196,33 +204,33 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    void PlaySound(float xS, float yS)
-    {
-        if (this.animStateInfoZero.IsName("NormalState") || this.animStateInfoZero.IsName("BattleState"))
-        {
-            this.currentAudio = AudioManager.Instance.PlayAudio(this.transform, "Run",true);
-        }
-        else if (this.animStateInfoZero.IsName("Dodge"))
-        {
-            if (this.currentAudio != null)
-                AudioManager.Instance.StopSound(this.currentAudio);
-        }
-        else if (this.animStateInfoZero.IsName("Attack1"))
-        {
-            if (this.currentAudio != null)
-                AudioManager.Instance.StopSound(this.currentAudio);
-        }
-        else if (this.animStateInfoZero.IsName("Attack2"))
-        {
-            if (this.currentAudio != null)
-                AudioManager.Instance.StopSound(this.currentAudio);
-        }
-        else if (this.animStateInfoZero.IsName("Attack3"))
-        {
-            if (this.currentAudio != null)
-                AudioManager.Instance.StopSound(this.currentAudio);
-        }
-    }
+    //void PlaySound(float xS, float yS)
+    //{
+    //    if (this.animStateInfoZero.IsName("NormalState") || this.animStateInfoZero.IsName("BattleState"))
+    //    {
+    //        this.currentAudio = AudioManager.Instance.PlayAudio(this.transform, "Run",true);
+    //    }
+    //    else if (this.animStateInfoZero.IsName("Dodge"))
+    //    {
+    //        if (this.currentAudio != null)
+    //            AudioManager.Instance.StopSound(this.currentAudio);
+    //    }
+    //    else if (this.animStateInfoZero.IsName("Attack1"))
+    //    {
+    //        if (this.currentAudio != null)
+    //            AudioManager.Instance.StopSound(this.currentAudio);
+    //    }
+    //    else if (this.animStateInfoZero.IsName("Attack2"))
+    //    {
+    //        if (this.currentAudio != null)
+    //            AudioManager.Instance.StopSound(this.currentAudio);
+    //    }
+    //    else if (this.animStateInfoZero.IsName("Attack3"))
+    //    {
+    //        if (this.currentAudio != null)
+    //            AudioManager.Instance.StopSound(this.currentAudio);
+    //    }
+    //}
 
     IEnumerator BattleTimeCount()
     {
@@ -235,11 +243,34 @@ public class PlayerController : MonoBehaviour
     public void HitFly()
     {
         this.anim.SetTrigger("Hit2");
-        this.rigidbody.AddForce(-this.transform.forward);
     }
 
     public void Hit()
     {
         this.anim.SetTrigger("Hit1");
+    }
+
+    public void IsDead()
+    {
+        if (this.isDead)
+        {
+            this.healthBar.value = 0.0f;
+            return;
+        }
+        this.healthBar.value = this.healthPoint / this.healthMax;
+        if(this.healthPoint <= 0.0f)
+        {
+            this.isDead = true;
+            this.anim.SetBool("isDead",this.isDead);
+        }
+    }
+    public bool IfCannotControl()
+    {
+        this.animStateInfoZero = this.anim.GetCurrentAnimatorStateInfo(0);
+        if (this.animStateInfoZero.IsName("HurtFly")|| this.animStateInfoZero.IsName("Hurt") || this.animStateInfoZero.IsName("Death") || this.animStateInfoZero.IsName("Laying Death"))
+        {
+            return true;
+        }
+        return false;
     }
 }
