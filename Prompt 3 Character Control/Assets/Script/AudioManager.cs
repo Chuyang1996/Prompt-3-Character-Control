@@ -295,6 +295,10 @@ public class AudioObjectPool
 			}
 
 		}
+	    public void StopMusic()
+        {
+		    this.backGroundMusic.Stop();
+	    }
 		//初始化AudioSource
 		private void InitAudioSource(AudioSource audioSource)
 		{

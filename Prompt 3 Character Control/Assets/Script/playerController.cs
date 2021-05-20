@@ -269,6 +269,7 @@ public class PlayerController : MonoBehaviour
         if (this.isDead)
         {
             this.badResult.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
             this.healthBar.value = 0.0f;
             return;
         }

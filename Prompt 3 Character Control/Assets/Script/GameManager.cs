@@ -12,7 +12,6 @@ public class GameManager : MonoBehaviour
         this.isBattle = false;
         this.audioManager.InitAudio();
         AudioManager.Instance.musicVolume = 0.2f;
-        AudioManager.Instance.PlayMusic("Deplata");
         AudioManager.Instance.PlayAudio(this.transform, "Desert",true);
     }
 

@@ -8,6 +8,7 @@ public class UISceneOne : MonoBehaviour
     public GameObject mainPanel;
     public Button resumeBtn;
     public Button exitBtn;
+    public Button restartBtn;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,11 +19,13 @@ public class UISceneOne : MonoBehaviour
             Time.timeScale = 1.0f;
         });
         this.exitBtn.onClick.AddListener(() => { Time.timeScale = 1.0f; DestroyImmediate(AudioManager.Instance.gameObject); Application.LoadLevel(0);  });
+        this.restartBtn.onClick.AddListener(() => { Time.timeScale = 1.0f; DestroyImmediate(AudioManager.Instance.gameObject); Application.LoadLevel(1);  });
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Cursor.visible = true;//

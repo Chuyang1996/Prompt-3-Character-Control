@@ -7,6 +7,7 @@ public class AIController : MonoBehaviour
 {
     public GameManager gameManager;
     public GameObject healthPanel;
+    public GameObject goodResult;
     [Range(0, 1000)]
     public float healthPoint;
     public Slider healthBar;
@@ -109,7 +110,11 @@ public class AIController : MonoBehaviour
         {
             this.healthPanel.SetActive(true);
             this.playerCpntroller.anim.SetBool("Battle", true);
-            this.gameManager.isBattle = true;
+            if (!this.gameManager.isBattle)
+            {
+                AudioManager.Instance.PlayMusic("Deplata");
+                this.gameManager.isBattle = true;
+            }
             this.confrontTimeCount = 0.0f;
             this.nav.Resume();
             this.nav.speed = this.moveSpeed;
@@ -272,7 +277,9 @@ public class AIController : MonoBehaviour
             this.healthBar.value = 0.0f;
             this.anim.ResetTrigger("Death");
             this.playerCpntroller.anim.SetBool("Battle", false);
+            AudioManager.Instance.StopMusic() ;
             this.gameManager.isBattle = false ;
+            this.goodResult.SetActive(true);
             return;
         }
         this.healthBar.value = this.healthPoint / this.healthMax;

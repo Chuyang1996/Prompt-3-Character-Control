@@ -29,7 +29,7 @@ public class Bullet : MonoBehaviour
     private bool isThrow = false;
     private Transform m_trans;
 
-
+    public GameObject effectResult;
     public BulletType bulletType;
     private void Update()
     {
@@ -104,7 +104,9 @@ public class Bullet : MonoBehaviour
         if(other.gameObject.tag =="Floor" && this.bulletType == BulletType.Straight)
         {
             AudioManager.Instance.PlayAudio(this.transform, "FireExplosion");
-            DestroyImmediate(this.gameObject);
+            this.effectResult.transform.parent = null;
+            this.effectResult.SetActive(true);
+            GameObject.Destroy(this.gameObject);
         }
         if (other.GetComponent<PlayerController>() != null)
         {
