@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class AIController : MonoBehaviour
 {
+    public GameManager gameManager;
     public GameObject healthPanel;
     [Range(0, 1000)]
     public float healthPoint;
@@ -108,6 +109,7 @@ public class AIController : MonoBehaviour
         {
             this.healthPanel.SetActive(true);
             this.playerCpntroller.anim.SetBool("Battle", true);
+            this.gameManager.isBattle = true;
             this.confrontTimeCount = 0.0f;
             this.nav.Resume();
             this.nav.speed = this.moveSpeed;
@@ -270,6 +272,7 @@ public class AIController : MonoBehaviour
             this.healthBar.value = 0.0f;
             this.anim.ResetTrigger("Death");
             this.playerCpntroller.anim.SetBool("Battle", false);
+            this.gameManager.isBattle = false ;
             return;
         }
         this.healthBar.value = this.healthPoint / this.healthMax;

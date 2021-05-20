@@ -17,7 +17,7 @@ public class UISceneOne : MonoBehaviour
             this.mainPanel.SetActive(false);
             Time.timeScale = 1.0f;
         });
-        this.exitBtn.onClick.AddListener(() => { DestroyImmediate(AudioManager.Instance.gameObject); Application.LoadLevel(0);  });
+        this.exitBtn.onClick.AddListener(() => { Time.timeScale = 1.0f; DestroyImmediate(AudioManager.Instance.gameObject); Application.LoadLevel(0);  });
     }
 
     // Update is called once per frame

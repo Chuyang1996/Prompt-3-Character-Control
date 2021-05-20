@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-
+    public GameManager gameManager;
     public bool isDead = false;
     public GameObject badResult;
     [Range(0,100)]
@@ -14,6 +14,10 @@ public class PlayerController : MonoBehaviour
 
     private float healthMax;
 
+    public bool isDefend = false;
+    public bool isHeal = false;
+
+    #region  //Physics
     public float moveSpeed;
     public float cameraSpeed;
     public Rigidbody rigidbody;
@@ -21,6 +25,9 @@ public class PlayerController : MonoBehaviour
     public Transform camera;
     private float speedup = 0.5f;
     private AnimatorStateInfo animStateInfoZero;
+    private AnimatorStateInfo animStateInfoOne;
+    #endregion
+
 
     [Range(3, 6)]
     private float battleTime;
@@ -28,8 +35,6 @@ public class PlayerController : MonoBehaviour
     private float battleTimeCount;
 
 
-    float axisX;
-    float axisY;
 
     float weight;
 
@@ -81,22 +86,28 @@ public class PlayerController : MonoBehaviour
         //}
         if (this.IfCannotControl())
             return;
+
         this.animStateInfoZero = this.anim.GetCurrentAnimatorStateInfo(0);
 
+        //if (this.IsHeal())
+        //    return;
+        this.anim.SetBool("isDefend", this.isDefend);
         if (Input.GetMouseButton(1) && (this.animStateInfoZero.IsName("BattleState") || this.animStateInfoZero.IsName("NormalState")))
         {
             this.weight = Mathf.Lerp(this.weight, 1, Time.deltaTime * 8.0f);
             this.anim.SetLayerWeight(1, weight);
             this.anim.SetLayerWeight(0, 0);
+            this.isDefend = true;
+            
             return;
         }
-        else
+        else 
         {
+            this.isDefend = false;
             this.weight = Mathf.Lerp(this.weight, 0, Time.deltaTime * 8.0f);
             this.anim.SetLayerWeight(0, 1);
             this.anim.SetLayerWeight(1, this.weight);
         }
-
         if (Input.GetKeyDown(KeyCode.Space) && !this.animStateInfoZero.IsName("Dodge"))
         {
             if ((this.animStateInfoZero.IsName("Attack1") || this.animStateInfoZero.IsName("Attack2") || this.animStateInfoZero.IsName("Attack3")) && this.animStateInfoZero.normalizedTime < 0.5f)
@@ -237,7 +248,8 @@ public class PlayerController : MonoBehaviour
     IEnumerator BattleTimeCount()
     {
         yield return new WaitForSeconds(this.battleTime);
-        this.anim.SetBool("Battle", false);
+        if(!this.gameManager.isBattle)
+            this.anim.SetBool("Battle", false);
 
     }
 
@@ -270,10 +282,40 @@ public class PlayerController : MonoBehaviour
     public bool IfCannotControl()
     {
         this.animStateInfoZero = this.anim.GetCurrentAnimatorStateInfo(0);
-        if (this.animStateInfoZero.IsName("HurtFly")|| this.animStateInfoZero.IsName("Hurt") || this.animStateInfoZero.IsName("Death") || this.animStateInfoZero.IsName("Laying Death"))
+        if (this.animStateInfoZero.IsName("HurtFly")|| this.animStateInfoZero.IsName("Hurt") || this.animStateInfoZero.IsName("Death") || this.animStateInfoZero.IsName("Laying Death") || this.animStateInfoZero.IsName("NormalDeath"))
         {
             return true;
         }
         return false;
+    }
+
+    public bool IsHeal()
+    {
+        this.animStateInfoOne = this.anim.GetCurrentAnimatorStateInfo(2);
+        if (Input.GetKeyDown(KeyCode.E) && !this.isHeal)
+        {
+            this.isHeal = true;
+        }
+        //if (this.animStateInfoOne.IsName("Heal") && this.animStateInfoOne.length > 0.8f)
+        //{
+        //    this.isHeal = false;
+        //}
+        if (this.isHeal)
+        {
+            Debug.Log("SSSSSS");
+            this.weight = 1;// Mathf.Lerp(this.weight, 1, Time.deltaTime * 80.0f);
+            this.anim.SetLayerWeight(2, weight);
+            this.anim.SetLayerWeight(0, 0);
+            return true;
+        }
+        else
+        {
+            this.weight = 0;// Mathf.Lerp(this.weight, 0, Time.deltaTime * 80.0f);
+            this.anim.SetLayerWeight(0, 1);
+            this.anim.SetLayerWeight(2, this.weight);
+            return false;
+        }
+       
+
     }
 }

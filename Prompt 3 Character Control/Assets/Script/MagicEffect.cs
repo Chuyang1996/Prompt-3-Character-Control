@@ -106,7 +106,10 @@ public class MagicEffect : MonoBehaviour
             if (this.isAttack1)
             {
                 Debug.LogError("打中了！！！！！！！！！！！！！！！！！！！！！！");
-                other.gameObject.GetComponent<PlayerController>().healthPoint -= 10.0f;
+                if (other.gameObject.GetComponent<PlayerController>().isDefend)
+                    other.gameObject.GetComponent<PlayerController>().healthPoint -= 2.0f;
+                else
+                    other.gameObject.GetComponent<PlayerController>().healthPoint -= 10.0f;
                 other.gameObject.GetComponent<PlayerController>().Hit();
 
                 ResetAttackTrigger();
@@ -114,7 +117,10 @@ public class MagicEffect : MonoBehaviour
             else if (this.isAttack2Left|| this.isAttack2Right)
             {
                 Debug.LogError("打中了！！！！！！！！！！！！！！！！！！！！！！");
-                other.gameObject.GetComponent<PlayerController>().healthPoint -= 20.0f;
+                if (other.gameObject.GetComponent<PlayerController>().isDefend)
+                    other.gameObject.GetComponent<PlayerController>().healthPoint -= 5.0f;
+                else
+                    other.gameObject.GetComponent<PlayerController>().healthPoint -= 20.0f;
                 other.gameObject.GetComponent<PlayerController>().Hit();
                 ResetAttackTrigger();
             }

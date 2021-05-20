@@ -80,4 +80,10 @@ public class PlayerAnimationSoundEvent : MonoBehaviour
         this.currentAudio.loop = false;
         this.currentAudio.Play();
     }
+    private void Defend()
+    {
+        this.currentAudio.clip = audios[11];
+        this.currentAudio.loop = false;
+        this.currentAudio.Play();
+    }
 }
